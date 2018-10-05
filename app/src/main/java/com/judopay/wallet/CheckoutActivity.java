@@ -47,8 +47,8 @@ public class CheckoutActivity extends Activity {
     private View mGooglePayButton;
     private TextView mGooglePayStatusText;
 
-    private ItemInfo mBikeItem = new ItemInfo("Simple Bike", 300 * 1000000, R.drawable.bike);
-    private long mShippingCost = 90 * 1000000;
+    private ItemInfo mBikeItem = new ItemInfo("Simple Bike", 1 * 1000000, R.drawable.bike);
+    private long mShippingCost = 1 * 1000000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
