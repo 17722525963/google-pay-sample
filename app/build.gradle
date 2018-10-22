@@ -28,6 +28,12 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services:12.0.1'
 
+    compile 'com.judopay:android-sdk:5.7.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.4.0'
+
     // "wallet" is the only module needed for the Google Payment API and this sample app.
     // Apps that selectively compile Google Play service APIs need only this dependency.
     //implementation 'com.google.android.gms:play-services-wallet:11.8.0'
