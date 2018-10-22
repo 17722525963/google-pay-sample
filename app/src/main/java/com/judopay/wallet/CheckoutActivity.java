@@ -37,6 +37,10 @@ import com.google.android.gms.wallet.PaymentDataRequest;
 import com.google.android.gms.wallet.PaymentMethodToken;
 import com.google.android.gms.wallet.PaymentsClient;
 import com.google.android.gms.wallet.TransactionInfo;
+import com.judopay.model.Receipt;
+
+import retrofit2.Retrofit;
+import rx.Single;
 
 public class CheckoutActivity extends Activity {
     // Arbitrarily-picked result code.
@@ -150,12 +154,21 @@ public class CheckoutActivity extends Activity {
                 alertDialog.show();
             }
 
+            PartnerApi localApi = buildApiClient();
+
             String billingName = paymentData.getCardInfo().getBillingAddress().getName();
             Toast.makeText(this, getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG).show();
 
             // Use token.getToken() to get the token string.
             Log.d("GooglePaymentToken", token.getToken());
         }
+    }
+
+    private PartnerApi buildApiClient() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://localhost")
+                .build();
+        return retrofit.create(PartnerApi.class);
     }
 
     private void handleError(int statusCode) {
