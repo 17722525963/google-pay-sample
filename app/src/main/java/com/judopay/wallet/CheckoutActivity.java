@@ -154,7 +154,18 @@ public class CheckoutActivity extends Activity {
                 alertDialog.show();
             }
 
-            PartnerApi localApi = buildApiClient();
+            PartnerApi localApi = buildApiClient("http://192.168.52.84/PartnerApi");
+
+            GooglePayRequest request =
+                    new GooglePayRequest.Builder()
+                        .setJudoId("1234567")
+                        .setWallet("encryptedBollocks")
+                        .setAmount("0.10")
+                        .setConsumerReference("GooglePayTest")
+                        .setCurrency("GBP")
+                        .build();
+
+            Single<Receipt> receiptSingle = localApi.googlePayTransaction(request);
 
             String billingName = paymentData.getCardInfo().getBillingAddress().getName();
             Toast.makeText(this, getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG).show();
@@ -164,9 +175,9 @@ public class CheckoutActivity extends Activity {
         }
     }
 
-    private PartnerApi buildApiClient() {
+    private PartnerApi buildApiClient(String baseUrl) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost")
+                .baseUrl(baseUrl)
                 .build();
         return retrofit.create(PartnerApi.class);
     }
